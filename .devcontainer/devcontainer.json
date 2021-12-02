@@ -31,7 +31,8 @@
 		"eamodio.gitlens",
 		"ms-vsliveshare.vsliveshare",
 		"mhutchie.git-graph",
-		"aaron-bond.better-comments"
+		"aaron-bond.better-comments",
+		"github.copilot"
 	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],

@@ -30,17 +30,72 @@ measurement)200(increased)208(increased)210(increased)200(
         decreased)207(increased)240(increased)269(increased)260(decreased)263(increased)
         In this example,
     there are 7 measurements that are larger than the previous measurement.
-        */
+
+
+           --- Part Two ---
+Considering every single measurement isn't as useful as you expected: there's
+just too much noise in the data.
+
+Instead, consider sums of a three-measurement sliding window. Again considering
+the above example:
+
+199  A
+200  A B
+208  A B C
+210    B C D
+200  E   C D
+207  E F   D
+240  E F G
+269    F G H
+260      G H
+263        H
+Start by comparing the first and second three-measurement windows. The
+measurements in the first window are marked A (199, 200, 208); their sum is 199
++ 200 + 208 = 607. The second window is marked B (200, 208, 210); its sum is
+618. The sum of measurements in the second window is larger than the sum of the
+first, so this first comparison increased.
+
+Your goal now is to count the number of times the sum of measurements in this
+sliding window increases from the previous sum. So, compare A with B, then
+compare B with C, then C with D, and so on. Stop when there aren't enough
+measurements left to create a new three-measurement sum.
+
+In the above example, the sum of each three-measurement window is as follows:
+
+A: 607 (N/A - no previous sum)
+B: 618 (increased)
+C: 618 (no change)
+D: 617 (decreased)
+E: 647 (increased)
+F: 716 (increased)
+G: 769 (increased)
+H: 792 (increased)
+In this example, there are 5 sums that are larger than the previous sum.
+
+Consider sums of a three-measurement sliding window. How many sums are larger
+than the previous sum?
+
+            */
 
 #include <stdio.h>
 
 #define MAXNUMBERS 2000
 
+int countArray(int array[]) {
+  int count = 0;
+  for (int i = 1; i < MAXNUMBERS; i++) {
+    if (array[i] > array[i - 1]) {
+      count++;
+    }
+  }
+  return count;
+}
+
 int main() {
   int measurements[MAXNUMBERS];
 
   // read the input file
-  FILE *fp = fopen("measurements.txt", "r");
+  FILE *fp = fopen("01.12/measurements.txt", "r");
 
   for (int i = 0; i < MAXNUMBERS; i++) {
     fscanf(fp, "%d", &measurements[i]);
@@ -48,12 +103,18 @@ int main() {
 
   // count the number of times a depth measurement increases from the previous
   // measurement
-  int count = 0;
-  for (int i = 1; i < MAXNUMBERS; i++) {
-    if (measurements[i] > measurements[i - 1]) {
-      count++;
-    }
+  int count = countArray(measurements);
+
+  printf("%d\n", count);
+
+  // create triplets of measurements
+  int triplets[MAXNUMBERS];
+  for (int i = 0; i < MAXNUMBERS; i++) {
+    triplets[i] = measurements[i] + measurements[i + 1] + measurements[i + 2];
   }
+
+  // count the number of times a triplet sum is larger than the previous sum
+  count = countArray(triplets);
   printf("%d\n", count);
 
   return 0;
