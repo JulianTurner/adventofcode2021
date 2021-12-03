@@ -126,7 +126,7 @@ int main() {
 
   // multiply the position and depth
   printf("%d\n", part1());
-  printf("%d\n", part2());
+  printf("%d\n", part1());
 
   return 0;
 }
