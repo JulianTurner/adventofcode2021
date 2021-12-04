@@ -119,7 +119,7 @@ int part2() {
 int main() {
 
   // open file and get the movements
-  FILE *file = fopen("02.12/movements.txt", "r");
+  FILE *file = fopen("2/movements.txt", "r");
   for (int i = 0; i < MOVEMENTS; i++) {
     fscanf(file, "%s %d", &movements[i].direction, &movements[i].value);
   }

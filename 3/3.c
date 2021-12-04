@@ -79,7 +79,7 @@ int main() {
   long report[REPORTS][12];
 
   // read the reports from the input file
-  FILE *file = fopen("03.12/report.txt", "r");
+  FILE *file = fopen("3/report.txt", "r");
   for (int i = 0; i < REPORTS; i++) {
     // read the long numbers from the file
     char temp[12];

@@ -95,7 +95,7 @@ int main() {
   int measurements[MAXNUMBERS];
 
   // read the input file
-  FILE *fp = fopen("01.12/measurements.txt", "r");
+  FILE *fp = fopen("1/measurements.txt", "r");
 
   for (int i = 0; i < MAXNUMBERS; i++) {
     fscanf(fp, "%d", &measurements[i]);
