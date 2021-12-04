@@ -49,32 +49,26 @@ epsilon rate, then multiply them together. What is the power consumption of the
 submarine? (Be sure to represent your answer in decimal, not binary.)
 */
 
-#include <math.h>
 #include <stdio.h>
 
-#define REPORTS 1
+#define REPORTS 1000
 #define REPORTLENGTH 12
 
 int binToDec(int arr[]) {
   int result = 0;
 
-  for (int i = 0; i < REPORTLENGTH; i++) {
-    int multiplier = 2;
-    for (int j = REPORTLENGTH - 4; j - i >= 0; j--) {
+  for (int i = REPORTLENGTH - 1; i >= 0; i--) {
+    int multiplier;
+    if (i == REPORTLENGTH - 1) {
+      multiplier = 1;
+    } else {
+      multiplier = 2;
+    }
+    for (int j = REPORTLENGTH - 2; j > i; j--) {
       multiplier *= 2;
     }
 
-    if (i == 10) {
-      continue;
-    }
-
-    if (i == 11) {
-      if (arr[i] == 1) {
-        result += 1;
-      };
-      continue;
-    }
-
+    printf("%d mal %d\n", arr[i], multiplier);
     result += arr[i] * multiplier;
   }
 
@@ -89,44 +83,86 @@ int main() {
   FILE *file = fopen("03.12/report.txt", "r");
   for (int i = 0; i < REPORTS; i++) {
     // read the long numbers from the file
-    for (int j = 0; j < REPORTLENGTH; j++) {
-      long temp = 0;
-      fscanf(file, "%ld", &temp);
-      printf("%ld\n", temp);
+    char temp[12];
+    fscanf(file, "%s", &temp);
+    // convert the long number to an array of ints
+    for (int j = 0; j <= REPORTLENGTH; j++) {
+      report[i][j] = (int)temp[j] - 48;
     }
   }
   fclose(file);
 
-  //   // ! MCB = most common bit
-  //   int MCB[REPORTLENGTH] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-  //   // ! LCB = least common bit
-  //   int LCB[REPORTLENGTH] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+  // ! MCB = most common bit
+  int MCB[REPORTLENGTH] = {0, 0, 0, 0, 0};
+  // ! LCB = least common bit
+  int LCB[REPORTLENGTH] = {0, 0, 0, 0, 0};
 
-  //   for (int i = 0; i < REPORTS; i++) {
-  //     for (int j = 0; j < REPORTLENGTH; j++) {
-  //       if (report[i][j] == 1) {
-  //         MCB[j]++;
-  //       }
+  for (int i = 0; i < REPORTS; i++) {
+    for (int j = 0; j < REPORTLENGTH; j++) {
+      if (report[i][j] == 1) {
+        MCB[j]++;
+      }
+    }
+  }
+
+  for (int j = 0; j < REPORTLENGTH; j++) {
+    if (MCB[j] > REPORTS / 2) {
+      MCB[j] = 1;
+      LCB[j] = 0;
+    } else {
+      MCB[j] = 0;
+      LCB[j] = 1;
+    }
+  }
+
+  int gamma = binToDec(MCB);
+  int epsilon = binToDec(LCB);
+
+  printf("%d\n", gamma);
+  printf("%d\n", epsilon);
+  printf("%d\n", gamma * epsilon);
+  // printf("%d\n", multiplier);
+  //     int multiplier = 2;
+  //     for (int j = 2; j < i; j++) {
+  //       printf("%d", i);
+  //       printf("%d", j);
+
+  //       multiplier *= 2;
+
+  //       // if (LCB[REPORTLENGTH - 2] == 1) {
+  //       //   result -= 2;
+  //       // }
   //     }
+
+  //     // if (i == 2) {
+  //     //   if (MCB[REPORTLENGTH - 1] == 1) {
+  //     //     result--;
+  //     //   }
+  //     // }
+
+  //     // if (i == 1) {
+  //     //   if (MCB[REPORTLENGTH] == 1) {
+  //     //     result++;
+  //     //   }
+  //     // }
+
+  //     printf("%d mal %d\n", MCB[i], multiplier);
+  //     result += MCB[i] * multiplier;
   //   }
+  //   //   if (LCB[REPORTLENGTH - 2] == 1) {
+  //   //     printf("ölkj");
+  //   //     result--;
+  //   //     result--;
+  //   //   }
 
-  //   for (int j = 0; j < REPORTLENGTH; j++) {
-  //     if (MCB[j] > 500) {
-  //       MCB[j] = 1;
-  //       LCB[j] = 0;
-  //     } else {
-  //       MCB[j] = 0;
-  //       LCB[j] = 1;
-  //     }
-  //   }
+  //   //   if (LCB[REPORTLENGTH - 1] == 1) {
+  //   //     printf("ölkj");
+  //   //     result++;
+  //   //   }
 
-  //   // gamma rate
-  //   int gamma = binToDec(MCB);
-  //   int epsilon = binToDec(LCB);
-
-  //   long result = gamma * epsilon;
-
-  //   printf("%ld\n", result);
+  //   //   if (LCB[5] == 1) {
+  //   //     result + 1;
+  //   //   }
 
   return 0;
 }
