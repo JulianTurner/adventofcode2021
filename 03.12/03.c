@@ -68,7 +68,6 @@ int binToDec(int arr[]) {
       multiplier *= 2;
     }
 
-    printf("%d mal %d\n", arr[i], multiplier);
     result += arr[i] * multiplier;
   }
 
@@ -121,48 +120,6 @@ int main() {
   printf("%d\n", gamma);
   printf("%d\n", epsilon);
   printf("%d\n", gamma * epsilon);
-  // printf("%d\n", multiplier);
-  //     int multiplier = 2;
-  //     for (int j = 2; j < i; j++) {
-  //       printf("%d", i);
-  //       printf("%d", j);
-
-  //       multiplier *= 2;
-
-  //       // if (LCB[REPORTLENGTH - 2] == 1) {
-  //       //   result -= 2;
-  //       // }
-  //     }
-
-  //     // if (i == 2) {
-  //     //   if (MCB[REPORTLENGTH - 1] == 1) {
-  //     //     result--;
-  //     //   }
-  //     // }
-
-  //     // if (i == 1) {
-  //     //   if (MCB[REPORTLENGTH] == 1) {
-  //     //     result++;
-  //     //   }
-  //     // }
-
-  //     printf("%d mal %d\n", MCB[i], multiplier);
-  //     result += MCB[i] * multiplier;
-  //   }
-  //   //   if (LCB[REPORTLENGTH - 2] == 1) {
-  //   //     printf("ölkj");
-  //   //     result--;
-  //   //     result--;
-  //   //   }
-
-  //   //   if (LCB[REPORTLENGTH - 1] == 1) {
-  //   //     printf("ölkj");
-  //   //     result++;
-  //   //   }
-
-  //   //   if (LCB[5] == 1) {
-  //   //     result + 1;
-  //   //   }
 
   return 0;
 }
